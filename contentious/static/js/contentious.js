@@ -597,6 +597,10 @@ var Contentious = (function(){
 		var cts = this,
 			$form = $(e.currentTarget || e),
 			$elem = this.$currentElement;
+
+		// Prevent double-submissions
+		$form.find('[type=submit]').attr('disabled','disabled');
+
 		try{
 			cts.events.publish('cts-pre-form-submit', [$form, $elem], $form);
 		}catch(e){
