@@ -15,7 +15,32 @@ Contentious is not a translation system, although it could be used for translaio
 
 * A way to alter a page's layout. It is designed for pre-defined layouts although markup can be added to the content of an editable element.
 
-## Usage
+
+# Examples
+
+```
+<html>
+<body>
+<!-- A link tag in which the user can edit the title, href and the link text. -->
+{% editable a "my_link" editable="content,href,title" class="cheese" href="http://www.google.com/" title=some_variable %}Default Link Text{% endeditable %}
+
+<!-- An iframe tag in which the user can edit the src -->
+{% editable iframe "my_video" editable="src" extra="youtube" class="video-popup" %}{% endeditable %}
+
+<!-- A select tag in which the user can edit the entire contents of the select.  You would need to define a custom inteface to allow non-techy users to edit this. -->
+{% editable select "my_select" editable="content,title" class="video-popup" %}<option>Cake</option>{% endeditable %}
+
+<!-- An image tag with an editable src and title.  Note that the <img /> tag is self-closing so the django tag is too! -->
+{% editable img "my_image" editable="src,title" src="http://www.images.com/1.jpg" %}
+
+<!-- any of the args/kwargs can be passed as template variables, with the exception of the HTML tag name -->
+{% editable img variable_for_key|some_filter editable=list_of_editable_attrs src=something.something %}
+</body>
+</html>
+```
+
+
+## Installation
 
 * Add contentious to `settings.INSTALLED_APPS`.
 * Implement your API which must provide the methods defined on the `ContentiousInterface`.
@@ -54,26 +79,3 @@ MyContentious.prototype.closeDialog = function(){
 var cts = new MyContentious();
 ```
 
-
-# Examples
-
-```
-<html>
-<body>
-<!-- A link tag in which the user can edit the title, href and the link text. -->
-{% editable a "my_link" editable="content,href,title" class="cheese" href="http://www.google.com/" title=some_variable %}Default Link Text{% endeditable %}
-
-<!-- An iframe tag in which the user can edit the src -->
-{% editable iframe "my_video" editable="src" extra="youtube" class="video-popup" %}{% endeditable %}
-
-<!-- A select tag in which the user can edit the entire contents of the select.  You would need to define a custom inteface to allow non-techy users to edit this. -->
-{% editable select "my_select" editable="content,title" class="video-popup" %}<option>Cake</option>{% endeditable %}
-
-<!-- An image tag with an editable src and title.  Note that the <img /> tag is self-closing so the django tag is too! -->
-{% editable img "my_image" editable="src,title" src="http://www.images.com/1.jpg" %}
-
-<!-- any of the args/kwargs can be passed as template variables, with the exception of the HTML tag name -->
-{% editable img variable_for_key|some_filter editable=list_of_editable_attrs src=something.something %}
-</body>
-</html>
-```
