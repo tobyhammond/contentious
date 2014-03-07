@@ -1,0 +1,103 @@
+
+.cts-highlight-editables .cts-highlight-visible-editable,
+.cts-highlight-hidden-editables .cts-highlight-hidden-editable{
+	background-color: #FFFFED;
+	outline: 1px solid yellow;
+}
+
+.cts-highlight-editables .cts-highlight-visible-editable.cts-highlight-default-data-editable,
+.cts-highlight-hidden-editables .cts-highlight-hidden-editable.cts-highlight-default-data-editable{
+	background-color: #ffe0e0;
+	outline: 1px solid red;
+}
+
+.cts-editable.hover{
+	opacity: 0.3;
+}
+
+.cts-edit-options .cts-edit-option-action{
+	line-height: 20px;
+}
+.cts-edit-options .cts-edit-option-action:hover{
+	text-decoration: underline;
+	cursor:pointer;
+}
+
+.cts-errormessage{
+	color: #DD4B39;
+	padding: 9px 0;
+}
+
+.cts-toolbar{
+	box-sizing: border-box;
+	background: none repeat scroll 0 0 #F1F1F1;
+	border: 1px solid #E5E5E5;
+	padding-left: 10px;
+	z-index: 100;
+	position: fixed;
+	opacity: 0.9;
+	width: 100%;
+	top: 0;
+	right: 0;
+	overflow: hidden;
+}
+.cts-toolbar:hover{
+	opacity: 1;
+}
+.cts-toolbar.collapsed{
+	box-sizing: content-box;
+	padding:0;
+}
+.cts-toolbar.collapsed .expand-collapse-buttons{
+	left: 0;
+	text-align: center;
+	background: inherit;
+}
+
+.expand-collapse-buttons{
+	position: absolute;
+	top:0;
+	right:0;
+	padding:5px;
+}
+
+.expand-collapse-buttons a{
+	width: 100%;
+}
+
+.cts-toolbar-close, .cts-toolbar-open{
+	cursor: pointer;
+	display: block;
+	font-size: 130%;
+	/* flip the arrows mirror-style */
+	-webkit-transform:rotateY(180deg);
+	-moz-transform:rotateY(180deg);
+	-o-transform:rotateY(180deg);
+	-ms-transform:rotateY(180deg);
+}
+
+.cts-edit-options{
+	text-align: center;
+}
+.cts-edit-options.cts-edit-options-outer{
+	background-color: #F1F1F1;
+	border: 1px solid #e5e5e5;
+	opacity: 0.9;
+	padding: 4px;
+}
+
+.cts-switched-off{
+	display: inline-block;
+	height: 25px;
+	opacity: 0.6;
+	overflow-y: hidden;
+	position: relative;
+}
+.cts-switched-off::before{
+	content: "Not displayed";
+	font-size: 14px;
+	position: absolute;
+	left: 50%;
+	margin-left: -50px;
+	margin-top: 5px;
+}

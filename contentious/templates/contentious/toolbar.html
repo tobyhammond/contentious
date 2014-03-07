@@ -1,0 +1,15 @@
+<div class="cts-toolbar{% block cts_toolbar_extra_classes %}{% endblock %}">
+	{% block cts_expand_collapse_buttons %}
+	<div class="expand-collapse-buttons">
+		<a class="cts-toolbar-close" title="Close the toolbar">&#8689;</a>
+		<a class="cts-toolbar-open hidden" title="Open the toolbar">&#8690;</a>
+	</div>
+	{% endblock %}
+	{% block cts_toolbar_buttons %}
+	<input type="checkbox" id="highlight_editables" class="cts-highlight-editables" /><label for="highlight_editables">Highlight editables</label>
+	<input type="checkbox" id="highlight_hidden_editables" class="cts-highlight-hidden-editables" /><label for="highlight_hidden_editables">Highlight hidden editables</label>
+	{% endblock %}
+	{% block cts_status %}
+	Altered <span class="editables-translated"></span> out of <span class="editables-total"></span>
+	{% endblock %}
+</div>

@@ -1,0 +1,18 @@
+{# Note: you need to add the <script> tag for contentious.js pointing to wherever you're serving it from #}
+{# You also need to include contentious.contrib.common.urls in your url config. #}
+{# This is only an example.  If you don't like it, make your own #}
+
+{% load url from future %}
+<script>
+	(function(){
+		var api_url = '{% url "contentious_save_content" %}';
+		var cts = new Contentious({apiURL: "{% url 'contentious_save_content' %}"});
+		$(document).on(
+			"cts-pre-form-submit",
+			function(e, $form){
+				var csrf = "{% csrf_token %}";
+				$form.append(csrf);
+			}
+		);
+	})();
+</script>
