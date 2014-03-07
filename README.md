@@ -46,7 +46,7 @@ Contentious is not a translation system, although it could be used for translaio
 * Implement your API which must provide the methods defined on the `ContentiousInterface`.
 * Set the string path to your interface settings.py, e.g. `CONTENTIOUS_API = 'myapp.api.ContentAPI'`.
 * Serve the JS and CSS files via whatever means you like.
-* Add the default contentious Ajax view to your URL conf, ` url(r'^whatever-you-like/', include('contentious.contrib.common.urls'))`.  Alternatively you can write your own view and use that.
+* Add the default contentious Ajax view to your URL conf, ` url(r'^whatever-you-like/', include('contentious.urls'))`.  Alternatively you can write your own view and use that.
 * Add Javascript to initialize Contentious, passing in the URL to the Ajax-handling view.  You'll also need to give the contentious JS access to your CSRF token.  The easiest way to do all of this is just `{% include "contentious/common_setup.html" %}`.
 * Optionally override any of the templates for the editing UI, or simply add CSS/JS to customise them. See [UI Customization] for more info.
 * Then just define any of your HTML tags as editable, see [Examples] below.

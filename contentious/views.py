@@ -6,8 +6,8 @@ from django.views.decorators.http import require_POST
 
 #CONTENTIOUS
 from contentious.api import api
-from contentious.contrib.common.decorators import require_edit_mode
-from contentious.contrib.common.utils import json_response_from_exception
+from contentious.decorators import require_edit_mode
+from contentious.utils import json_response_from_exception
 
 
 @require_POST
