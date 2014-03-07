@@ -218,18 +218,6 @@ class EditableTagTest(TestCase):
             templ.render(Context({}))
 
 
-
-class EditDialogueTest(TestCase):
-    """ Test case for the {% contentious_edit_dialogue %} tag. """
-
-    def test_contentious_edit_dialogue(self):
-        """ Test basic rendering of the {% contentious_edit_dialogue %} tag. """
-        templ = Template(
-            '{% load contentious %}'
-            '{% contentious_edit_dialogue %}'
-        )
-
-
 class ToolbarTagTest(TestCase):
 
     templ_normal_tag = Template(
