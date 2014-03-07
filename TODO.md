@@ -1,5 +1,6 @@
 ## Core
 
+* Add more fields to ContentItemBase for other HTML attributes.  We could just have a big JSON field for them instead to avoid having to specify a new field for every different HTML attribute.
 * Add CSS for:
   * Making the modal form look nice.
 
