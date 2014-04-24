@@ -92,6 +92,14 @@ class EditableTag(template.Node):
 
         #Check that the edited data only contains items which are allowed to be edited
         data = {k:v for k, v in data.items() if k in editables}
+
+        display_from_tag = bool(attrs.pop('display', True))
+        display_from_data = data.pop('display', None)
+        if display_from_data is not None:
+            switched_off = not display_from_data
+        else:
+            switched_off = not display_from_tag
+
         #Now start to build the HTML tag...
         final_attrs = {}
         #start with the default attrs which were defined in the template tag
@@ -109,8 +117,6 @@ class EditableTag(template.Node):
             classes = final_attrs.get("class", "").split(" ")
             classes.append("cts-nested-editable" if is_nested else "cts-editable")
 
-            switched_off = data.pop('display', None) is False
-
             final_attrs['data-cts-switched-off'] = int(switched_off)
             if switched_off:
                 classes.append("cts-switched-off")
@@ -123,7 +129,7 @@ class EditableTag(template.Node):
                 final_attrs["id"] = key
 
             final_attrs['class'] = " ".join(c for c in classes if c)
-        elif data.pop('display', None) is False:
+        elif switched_off:
             # we aren't in edit mode and content is set to not show
             return ''
 

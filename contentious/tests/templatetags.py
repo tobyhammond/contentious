@@ -217,6 +217,77 @@ class EditableTagTest(TestCase):
         with mock.patch('contentious.templatetags.contentious.api', new=api):
             templ.render(Context({}))
 
+    @mock.patch("contentious.templatetags.contentious.api", new=configurable_api)
+    def test_display_on_off(self):
+        """ Test that the 'display' kwarg switches the display of the tag on/off as expected. """
+        tag_default_display_on = Template(
+            '{% load contentious %}{% editable div "my_div" editable="display" display=1 %}'
+            'My content{% endeditable %}'
+        )
+        tag_default_display_off = Template(
+            '{% load contentious %}{% editable div "my_div" editable="display" display=0 %}'
+            'My content{% endeditable %}'
+        )
+
+        def has_tag(html):
+            return bool(html.strip())
+        def has_data_attr(html):
+            return bool('data-cts-switched-off' in html)
+        def data_attr_val(html):
+            return re.search('data-cts-switched-off="([^"]*)"', html).groups()[0]
+        def has_switched_off_class(html):
+            return bool(re.search('class="[^"]*cts-switched-off', html))
+
+        def assert_edit_mode_display_on(html):
+            self.assertTrue(
+                has_tag(html) and data_attr_val(html) == "0" and not has_switched_off_class(html)
+            )
+        def assert_edit_mode_display_off(html):
+            self.assertTrue(
+                has_tag(html) and data_attr_val(html) == "1" and has_switched_off_class(html)
+            )
+        def assert_live_mode_display_on(html):
+            self.assertTrue(
+                has_tag(html) and not has_data_attr(html) and not has_switched_off_class(html)
+            )
+        def assert_live_mode_display_off(html):
+            self.assertFalse(has_tag(html))
+
+        edit_mode_tests = (
+            # These are triples of:
+                # The API response for get_content_data
+                # Assertion function for the tag_default_display_on
+                #Assertion function for the tag_default_display_off
+            ({}, assert_edit_mode_display_on, assert_edit_mode_display_off),
+            ({'display': None}, assert_edit_mode_display_on, assert_edit_mode_display_off),
+            ({'display': False}, assert_edit_mode_display_off, assert_edit_mode_display_off),
+            ({'display': True}, assert_edit_mode_display_on, assert_edit_mode_display_on),
+        )
+        live_mode_tests = (
+            # These are triples of:
+                # The API response for get_content_data
+                # Assertion function for the tag_default_display_on
+                #Assertion function for the tag_default_display_off
+            ({}, assert_live_mode_display_on, assert_live_mode_display_off),
+            ({'display': None}, assert_live_mode_display_on, assert_live_mode_display_off),
+            ({'display': False}, assert_live_mode_display_off, assert_live_mode_display_off),
+            ({'display': True}, assert_live_mode_display_on, assert_live_mode_display_on),
+        )
+
+        context = Context({})
+
+        configurable_api.set_return_value('in_edit_mode', True)
+        for data, default_display_on_test, default_display_off_test in edit_mode_tests:
+            configurable_api.set_return_value('get_content_data', data)
+            default_display_on_test(tag_default_display_on.render(context))
+            default_display_off_test(tag_default_display_off.render(context))
+
+        configurable_api.set_return_value('in_edit_mode', False)
+        for data, default_display_on_test, default_display_off_test in live_mode_tests:
+            configurable_api.set_return_value('get_content_data', data)
+            default_display_on_test(tag_default_display_on.render(context))
+            default_display_off_test(tag_default_display_off.render(context))
+
 
 class ToolbarTagTest(TestCase):
 
