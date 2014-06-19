@@ -617,6 +617,7 @@ var Contentious = (function(){
 		}
 		function formSubmitFailure(xhr, error, status){
 			cts.events.publish('cts-form-submit-failure', [$form, $elem, xhr], $form);
+			$form.find('[type=submit]').removeAttr('disabled');
 			var errors = JSON.parse(xhr.responseText || "{}");
 			cts.attachErrorsToForm(errors, $form);
 		}
@@ -774,6 +775,7 @@ var Contentious = (function(){
 	};
 
 	klass.prototype.addErrors = function(errors, $form, $elem){
+		$form.find('[type=submit]').removeAttr('disabled');
 		$.each($form.find('input, textarea, select'), function(){
 			var $input = $(this),
 				name = $input.attr('name'),
