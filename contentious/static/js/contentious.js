@@ -63,6 +63,11 @@ Events:
 		This is called when validation has failed for the edit form.
 
 		params: the object containing the field errors, the jQuery object of the form, the clicked element being editing
+
+	'cts-dialog-closed':
+		This is triggered after the dialog is closed.
+
+		params: the jQuery object of the form, the clicked element being edited.
 */
 
 var Contentious = (function(){
@@ -614,6 +619,7 @@ var Contentious = (function(){
 			cts.updateEditedElement($elem, $form);
 			cts.updateTranslationProgress();
 			cts.closeDialog();
+			cts.events.publish('cts-dialog-closed', [$form, $elem], $form);
 		}
 		function formSubmitFailure(xhr, error, status){
 			cts.events.publish('cts-form-submit-failure', [$form, $elem, xhr], $form);
