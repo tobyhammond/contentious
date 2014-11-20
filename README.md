@@ -2,7 +2,7 @@
 
 A Django app for making HTML elements editable.
 
-Contentious is not a translation system, although it could be used for translaion.  It is much more than that.  It allows editing of HTML pages by non-HTML savvy users.  It is designed for fixed-layout pages, and you can control to what extent the users can edit the content and you can completely customise the interface through which they do it.
+Contentious is not a translation system, although it could be used for translation.  It is much more than that.  It allows editing of HTML pages by non-HTML savvy users.  It is designed for fixed-layout pages, and you can control to what extent the users can edit the content and you can completely customise the interface through which they do it.
 
 ## Features
 
