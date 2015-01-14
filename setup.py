@@ -12,4 +12,5 @@ setup(name='Contentious',
       author_email='adam@potatolondon.com',
       url='https://github.com/potatolondon/contentious',
       packages=PACKAGES,
+      include_package_data=True,
      )
