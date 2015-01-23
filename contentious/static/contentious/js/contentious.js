@@ -316,15 +316,8 @@ var Contentious = (function(){
 	};
 
 	klass.prototype.mergeObjects = function(obj, overrides){
-		if(typeof obj != 'object' || obj.length !== undefined){
-			return typeof overrides != 'object' ? overrides : obj;
-		}
-		var copy = {};
-		for(var key in obj){
-			copy[key] = this.mergeObjects(obj[key], overrides[key] || {});
-		}
-		return copy;
-	};
+        return $.extend(true, {}, obj, overrides);
+    };
 
 	klass.prototype.serializeArray = function($elem){
 		var ar = $elem.serializeArray();
